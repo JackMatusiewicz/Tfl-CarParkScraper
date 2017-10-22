@@ -4,7 +4,7 @@ module FileStore =
     open Newtonsoft.Json
     open System.IO
     
-    let serialise (xs : 'a list) : string list  =
+    let private serialise (xs : 'a list) : string list  =
         List.map (fun o -> JsonConvert.SerializeObject(o)) xs
 
     type FileAgentMessage<'t> = | StoreData of 't list

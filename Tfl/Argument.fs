@@ -6,9 +6,9 @@ type Args = {
 }
 
 module Argument =
-    let emptyArgs = {AppId = ""; AppKey = ""}
+    let private emptyArgs = {AppId = ""; AppKey = ""}
 
-    let addArg (arg : string) (args : Args) : Args =
+    let private addArg (arg : string) (args : Args) : Args =
         match arg with
         | _ when arg.StartsWith("--appId=") ->
                 let appId = arg.Replace("--appId=", "")

@@ -35,13 +35,13 @@ module CarPark =
 
     let private makePair (a : 'a) (b : 'b) = a, b
 
-    let constructDatabaseRecords ((timestamp, carParkInfo) : DateTime * CarParkInfo) : CarParkDatabaseRecord list =
+    let private constructDatabaseRecords ((timestamp, carParkInfo) : DateTime * CarParkInfo) : CarParkDatabaseRecord list =
         let innerConstruct (timestamp : DateTime) (id : string) (bay : Bay) =
             {bayCount = bay.bayCount; free = bay.free; occupied = bay.occupied;
                 bayType = bay.bayType; timestamp = timestamp; carParkId = id}
         List.map (innerConstruct timestamp (carParkInfo.id)) carParkInfo.bays
 
-    let getCarParkInfo ((Creds creds) : CredentialUrlSegment) : ((DateTime * CarParkInfo) list) option =
+    let private getCarParkInfo ((Creds creds) : CredentialUrlSegment) : ((DateTime * CarParkInfo) list) option =
         try
             let url = "https://api.tfl.gov.uk/Occupancy/CarPark"
             let urlWithCreds = url + "/?" + creds
