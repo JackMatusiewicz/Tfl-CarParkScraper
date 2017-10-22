@@ -13,7 +13,7 @@ module Program =
     let fiveMinutesInMillis = 300000 
 
     let rec updateStore (agent : FileAgent<CarParkDatabaseRecord>) (creds : CredentialUrlSegment) : Async<unit> = async {
-        let data = constructNewDataStore creds
+        let data = getLatestData creds
         match data with
         | Some records ->
             agent.StoreData records

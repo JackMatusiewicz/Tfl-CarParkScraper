@@ -52,7 +52,7 @@ module CarPark =
         with
             | _ -> None
 
-    let constructNewDataStore (creds : CredentialUrlSegment) : (CarParkDatabaseRecord list) option = opt {
+    let getLatestData (creds : CredentialUrlSegment) : (CarParkDatabaseRecord list) option = opt {
         let! data = getCarParkInfo creds
         let records = data |> List.map constructDatabaseRecords
                            |> List.concat
