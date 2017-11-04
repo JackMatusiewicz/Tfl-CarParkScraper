@@ -12,16 +12,16 @@ module FileStore =
     type FileAgent<'t>(path : string) =
         let filePath = path
         let agent = MailboxProcessor.Start(fun inbox ->
-            let loop () = async {
+            let rec loop () = async {
                 let! message = inbox.Receive()
                 match message with
                 | StoreData data ->
                     let jsonData = serialise data
                     File.AppendAllLines(filePath, jsonData)
+                    return! loop ()
             }
             loop ()
         )
 
         member this.StoreData (data : 't list) =
             agent.Post(StoreData data)
-

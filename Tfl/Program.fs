@@ -30,7 +30,7 @@ module Program =
     let main argv = 
         let args = Argument.parse argv
         let creds = constructCredentialsUrlSegment args.AppKey args.AppId
-        let agent = FileAgent<CarParkDatabaseRecord>("carParkData.txt")
+        let agent = FileAgent<CarParkDatabaseRecord>(@"carParkData.txt")
 
         updateStore agent creds |> Async.RunSynchronously
 
