@@ -6,4 +6,3 @@ module HttpRequest =
     let get (url : string) =
         use client = new WebClient()
         client.DownloadString(url)
-
